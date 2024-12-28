@@ -1,0 +1,19 @@
+[
+    {
+      "id": 1,
+      "name": "Cafe Java",
+      "location": "Downtown",
+      "description": "A cozy cafe with good coffee and Wi-Fi.",
+      "lat": 40.7128,
+      "lng": -74.006
+    },
+    {
+      "id": 2,
+      "name": "TechHub Co-Working",
+      "location": "Midtown",
+      "description": "A modern co-working space with shared desks.",
+      "lat": 40.73061,
+      "lng": -73.935242
+    }
+  ]
+  
