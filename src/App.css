@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: #2c3e50;
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+/* Search Section */
+.search-section {
+  background: #f8f9fa;
+  padding: 1.5rem 0;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Content Layout */
+.content-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+/* Filter Section */
+.filter-section {
+  width: 250px;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.price-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.amenity-option {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Workspace List */
+.workspace-list {
+  flex: 1;
+}
+
+.workspaces-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Workspace Card */
+.workspace-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.workspace-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.amenities {
+  display: flex;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  color: #3498db;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.view-button {
+  width: 100%;
+  padding: 0.8rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
