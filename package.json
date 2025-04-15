@@ -16,11 +16,14 @@
     "react-router-dom": "^7.5.0",
     "react-scripts": "^5.0.1"
   },
+  "homepage": "https://yourusername.github.io/repo-name",
   "scripts": {
     "start": "cross-env HOST=127.0.0.1 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -b main"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^6.3.0"
   }
 }
