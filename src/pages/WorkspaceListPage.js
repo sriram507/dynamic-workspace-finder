@@ -1,38 +1,67 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import WorkspaceCard from '../components/WorkspaceCard';
 import MapComponent from '../components/MapComponent.js';
 
-const sampleWorkspaces = [
-  {
-    id: 1,
-    name: 'IndiQube Alpha',
-    location: 'Koramangala',
-    latitude: 12.9352,
-    longitude: 77.6250,
-  },
-  {
-    id: 2,
-    name: 'WeWork Galaxy',
-    location: 'MG Road',
-    latitude: 12.9719,
-    longitude: 77.6412,
-  },
-];
+export default function WorkspaceListPage({ workspaces, setWorkspaces }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [priceRange, setPriceRange] = useState([0, 100]);
+  const navigate = useNavigate();
 
-function WorkspaceListPage() {
+  const filteredWorkspaces = workspaces.filter(ws => {
+    const matchesSearch = ws.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         ws.location.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPrice = ws.pricePerHour >= priceRange[0] && 
+                        ws.pricePerHour <= priceRange[1];
+    return matchesSearch && matchesPrice;
+  });
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Workspace List Page</h1>
+    <div className="container mx-auto p-4">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-4">Find Your Workspace</h1>
+        
+        {/* Search Bar */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search by name or location"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full p-3 border rounded-lg"
+          />
+        </div>
+        
+        {/* Price Filter */}
+        <div className="mb-6">
+          <label className="block mb-2">Price Range: ${priceRange[0]} - ${priceRange[1]}</label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={priceRange[1]}
+            onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+            className="w-full"
+          />
+        </div>
+      </div>
 
-      <ul className="mb-6">
-        {sampleWorkspaces.map((workspace) => (
-          <li key={workspace.id}>
-            {workspace.name} - {workspace.location}
-          </li>
+      {/* Workspace Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {filteredWorkspaces.map(ws => (
+          <WorkspaceCard 
+            key={ws.id} 
+            workspace={ws} 
+            onClick={() => navigate(`/workspace/${ws.id}`)}
+          />
         ))}
-      </ul>
+      </div>
 
-      <MapComponent workspaces={sampleWorkspaces} />
+      {/* Interactive Map */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Workspace Locations</h2>
+        <MapComponent workspaces={filteredWorkspaces} />
+      </div>
     </div>
   );
 }
-
-export default WorkspaceListPage;

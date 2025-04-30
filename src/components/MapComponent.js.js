@@ -1,39 +1,39 @@
-// src/components/MapComponent.js
+import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 
-// Optional custom icon
-const markerIcon = new L.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
+// Fix default marker icons
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-function MapComponent({ workspaces }) {
+export default function MapComponent({ workspaces }) {
   return (
-    <MapContainer
-      center={[12.9716, 77.5946]} // Default center (Bangalore, change if needed)
-      zoom={12}
-      style={{ height: '400px', width: '100%' }}
-    >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution="&copy; OpenStreetMap contributors"
-      />
-      {workspaces.map((workspace) => (
-        <Marker
-          key={workspace.id}
-          position={[workspace.latitude, workspace.longitude]}
-          icon={markerIcon}
-        >
-          <Popup>
-            <strong>{workspace.name}</strong><br />
-            {workspace.location}
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div className="h-[400px] w-full z-0">
+      <MapContainer 
+        center={[39.8283, -98.5795]} // Center of US
+        zoom={4} 
+        style={{ height: '100%', width: '100%' }}
+      >
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        />
+        {workspaces.map(ws => (
+          <Marker key={ws.id} position={[ws.latitude, ws.longitude]}>
+            <Popup>
+              <div className="text-center">
+                <h3 className="font-bold">{ws.name}</h3>
+                <p>{ws.location}</p>
+                <p>${ws.pricePerHour}/hour</p>
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 }
-
-export default MapComponent;
